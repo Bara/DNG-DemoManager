@@ -11,9 +11,7 @@ public void SQLConnect(Database db, const char[] error, any data)
 		LogError("Error connecting to database: %s", error);
 		return;
 	}
-	
-	g_bMySQL = true;
-	
+		
 	g_dDatabase = db;
 	
 	g_dDatabase.Query(SQL_DoNothing, "CREATE TABLE IF NOT EXISTS `demo_manager`( `id` INT NOT NULL AUTO_INCREMENT, `ip` varchar(18) COLLATE utf8mb4_unicode_ci NOT NULL, `port` int(6) NOT NULL, `map` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL, `filename` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL, `start` int(11) NOT NULL, `end` int(11) NULL, `ticks` int(11) NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");

@@ -56,7 +56,7 @@ void CheckStatus()
 {
 	int iMinClients = g_hMinPlayersStart.IntValue;
 	
-	if(g_bMySQL && !SourceTV_IsRecording() && GetPlayerCount() >= iMinClients)
+	if(g_dDatabase != null && !SourceTV_IsRecording() && GetPlayerCount() >= iMinClients)
 	{
 		StartRecord();
 	}
@@ -100,7 +100,7 @@ public void SourceTV_OnStartRecording(int instance, const char[] filename)
 {
 	LogToFileEx(g_sLogFile, "[RECORDER] Started recording gotv #%d demo to %s", instance, filename);
 	
-	if(g_bMySQL && g_dDatabase != null)
+	if(g_dDatabase != null)
 	{
 		SQL_InsertDemo(filename);
 	}
@@ -116,7 +116,7 @@ public void SourceTV_OnStopRecording(int instance, const char[] filename, int re
 		
 		CompressDemo(filename);
 		
-		if(g_bMySQL && g_dDatabase != null)
+		if(g_dDatabase != null)
 		{
 			SQL_UpdateDemo(filename, recordingtick);
 		}

@@ -17,7 +17,6 @@ ConVar g_cTVName = null;
 ConVar g_cDelete = null;
 ConVar g_cTarget = null;
 
-bool g_bMySQL = false;
 Database g_dDatabase = null;
 
 char g_sTVName[MAX_NAME_LENGTH] = "";
