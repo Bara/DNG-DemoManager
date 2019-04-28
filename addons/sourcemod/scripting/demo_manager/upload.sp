@@ -9,24 +9,29 @@ void UploadDemo(const char[] outFile, const char[] sDemo)
 	char sTarget[32];
 	g_cTarget.GetString(sTarget, sizeof(sTarget));
 	
-	Handle pack = CreateDataPack();
+	DataPack pack = new DataPack();
 	EasyFTP_UploadFile(sTarget, outFile, outFile, UploadComplete, pack);
-	WritePackString(pack, sDemo);
+	pack.WriteString(sDemo);
 }
 
-public int UploadComplete(const char[] sTarget, const char[] sLocalFile, const char[] sRemoteFile, int iErrorCode, any pack)
+public int UploadComplete(const char[] sTarget, const char[] sLocalFile, const char[] sRemoteFile, int iErrorCode, DataPack pack)
 {
-	ResetPack(pack);
+	pack.Reset();
 	char sDemo[PLATFORM_MAX_PATH];
-	ReadPackString(pack, sDemo, sizeof(sDemo));
+	pack.ReadString(sDemo, sizeof(sDemo));
+	delete pack;
 	
 	if(iErrorCode == 0)
 	{
 		LogToFileEx(g_sLogFile, "[UPLOAD] %s successfully uploaded!", sDemo);
 		
 		if(g_cDelete.BoolValue)
+		{
 			DeleteFile(sLocalFile);
+		}
 	}
 	else
+	{
 		LogError("[demo_manager] Demo Upload of %s failed! (Error Code: %d)", sLocalFile, iErrorCode);
+	}
 }

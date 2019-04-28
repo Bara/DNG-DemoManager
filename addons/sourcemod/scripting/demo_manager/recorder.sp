@@ -24,13 +24,17 @@ void Recorder_OnPluginStart()
 void Recorder_OnMapStart()
 {
 	if(SourceTV_IsRecording())
+	{
 		StopRecord();
+	}
 }
 
 void Recorder_OnMapEnd()
 {
 	if(SourceTV_IsRecording())
+	{
 		StopRecord();
+	}
 }
 
 void Recorder_OnClientPutInServer()
@@ -53,9 +57,13 @@ void CheckStatus()
 	int iMinClients = g_hMinPlayersStart.IntValue;
 	
 	if(g_bMySQL && !SourceTV_IsRecording() && GetPlayerCount() >= iMinClients)
+	{
 		StartRecord();
+	}
 	else if(SourceTV_IsRecording() && GetPlayerCount() < iMinClients)
+	{
 		StopRecord();
+	}
 }
 
 void StartRecord()
@@ -74,14 +82,18 @@ void StartRecord()
 		StripQuotes(sFile);
 		
 		if (!SourceTV_StartRecording(sFile))
+		{
 			LogToFileEx(g_sLogFile, "[RECORDER] GOTV failed to start recording to: %s", sFile);
+		}
 	}
 }
 
 void StopRecord()
 {
 	if(SourceTV_IsRecording())
+	{
 		SourceTV_StopRecording();
+	}
 }
 
 public void SourceTV_OnStartRecording(int instance, const char[] filename)
@@ -89,7 +101,9 @@ public void SourceTV_OnStartRecording(int instance, const char[] filename)
 	LogToFileEx(g_sLogFile, "[RECORDER] Started recording gotv #%d demo to %s", instance, filename);
 	
 	if(g_bMySQL && g_dDatabase != null)
+	{
 		SQL_InsertDemo(filename);
+	}
 }
 
 public void SourceTV_OnStopRecording(int instance, const char[] filename, int recordingtick)
@@ -103,10 +117,14 @@ public void SourceTV_OnStopRecording(int instance, const char[] filename, int re
 		CompressDemo(filename);
 		
 		if(g_bMySQL && g_dDatabase != null)
+		{
 			SQL_UpdateDemo(filename, recordingtick);
+		}
 	}
 	else
+	{
 		DeleteFile(filename);
+	}
 }
 
 void InitDirectory(const char[] sDir)

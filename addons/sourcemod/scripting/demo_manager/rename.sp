@@ -25,6 +25,7 @@ void SetTVName(int client)
 	{
 		SetClientInfo(client, "name", g_sTVName);
 		SetClientName(client, g_sTVName);
+		SourceTV_SetClientTVTitle(SourceTV_GetBotIndex(), g_sTVName);
 	}
 }
 

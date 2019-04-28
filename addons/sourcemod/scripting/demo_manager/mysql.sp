@@ -73,7 +73,7 @@ stock void RemoveOldDemos()
 	// 7 Tage = 604800
 	// 3 Tage = 259200
 	// 1 Tag  = 86400
-	Format(sQuery, sizeof(sQuery), "SELECT id FROM demo_manager WHERE start < UNIX_TIMESTAMP()-259200;");
+	Format(sQuery, sizeof(sQuery), "SELECT id FROM demo_manager WHERE start < UNIX_TIMESTAMP()-604800;");
 	g_dDatabase.Query(SQL_DeleteDemos, sQuery);
 }
 

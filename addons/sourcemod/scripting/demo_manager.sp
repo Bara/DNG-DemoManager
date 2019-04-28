@@ -32,7 +32,7 @@ char g_sLogFile[PLATFORM_MAX_PATH + 1] = "";
 
 public Plugin myinfo = 
 {
-	name = "[Outbreak] Demo Manager",
+	name = "Demo Manager - All in One package (Record, Compress, Upload and MySQL)",
 	author = "Bara (based on Stevo.TVR's demo plugin)",
 	description = "",
 	version = "1.0.0",
