@@ -10,8 +10,8 @@
 
 #define LoopClients(%1) for(int %1 = 1; %1 <= MaxClients; %1++) if(IsClientValid(%1))
 
-ConVar g_hMinPlayersStart = null;
-ConVar g_hIgnoreBots = null;
+ConVar g_cMinPlayersStart = null;
+ConVar g_cIgnoreBots = null;
 ConVar g_cDemoPath = null;
 ConVar g_cTVName = null;
 ConVar g_cDelete = null;
@@ -102,9 +102,9 @@ public void OnClientDisconnect_Post(int client)
 
 int GetPlayerCount()
 {
-	if(!GetConVarBool(g_hIgnoreBots))
+	if(!g_cIgnoreBots.BoolValue)
 	{
-		return GetClientCount(false)-1;
+		return GetClientCount(false) - 1;
 	}
 
 	int iCount = 0;

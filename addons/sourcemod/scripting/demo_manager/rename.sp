@@ -5,10 +5,10 @@ void Rename_OnPluginStart()
 		SetFailState("Couldn't find cvar 'tv_name'");
 	}
 	
-	GetConVarString(g_cTVName, g_sTVName, sizeof(g_sTVName));
-	HookConVarChange(g_cTVName, OnConVarChanged);
+	g_cTVName.GetString(g_sTVName, sizeof(g_sTVName));
+	g_cTVName.AddChangeHook(OnConVarChanged);
 	
-	SetTVName(FindSourceTv());
+	SetTVName(FindGOTV());
 }
 
 void Rename_OnClientPostAdminCheck(int client)
@@ -29,7 +29,7 @@ void SetTVName(int client)
 	}
 }
 
-int FindSourceTv()
+int FindGOTV()
 {
 	for(int i; i <= MaxClients; i++)
 	{

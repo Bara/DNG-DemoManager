@@ -1,10 +1,10 @@
-public void OnConVarChanged(ConVar convar, const char[] oldValue, const char[] intValue)
+public void OnConVarChanged(ConVar convar, const char[] oldValue, const char[] newValue)
 {
 	if(convar == g_cDemoPath)
 	{
-		if(!DirExists(intValue))
+		if(!DirExists(newValue))
 		{
-			InitDirectory(intValue);
+			InitDirectory(newValue);
 		}
 	}
 	else
@@ -14,7 +14,7 @@ public void OnConVarChanged(ConVar convar, const char[] oldValue, const char[] i
 	
 	if (convar == g_cTVName)
 	{
-		GetConVarString(g_cTVName, g_sTVName, sizeof(g_sTVName));
-		SetTVName(FindSourceTv());
+		g_cTVName.GetString(g_sTVName, sizeof(g_sTVName));
+		SetTVName(FindGOTV());
 	}
 }

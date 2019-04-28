@@ -28,9 +28,9 @@ void SQL_InsertDemo(const char[] sDemo2)
 	strcopy(sDemo, sizeof(sDemo), sDemo2);
 	ReplaceString(sDemo, sizeof(sDemo), "./", "");
 	
-	int iPort = GetConVarInt(FindConVar("hostport"));
+	int iPort = FindConVar("hostport").IntValue;
 	int ips[4];
-	int iIP = GetConVarInt(FindConVar("hostip"));
+	int iIP = FindConVar("hostip").IntValue;
 	ips[0] = (iIP >> 24) & 0x000000FF;
 	ips[1] = (iIP >> 16) & 0x000000FF;
 	ips[2] = (iIP >> 8) & 0x000000FF;

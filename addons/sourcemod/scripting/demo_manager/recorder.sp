@@ -1,19 +1,17 @@
 void Recorder_OnPluginStart()
 {
-	g_hMinPlayersStart = AutoExecConfig_CreateConVar("demo_manager_recorder_minplayers", "2", "Minimum players on server to start recording", _, true, 0.0);
-	g_hIgnoreBots = AutoExecConfig_CreateConVar("demo_manager_recorder_ignorebots", "1", "Ignore bots in the player count", _, true, 0.0, true, 1.0);
+	g_cMinPlayersStart = AutoExecConfig_CreateConVar("demo_manager_recorder_minplayers", "2", "Minimum players on server to start recording", _, true, 0.0);
+	g_cIgnoreBots = AutoExecConfig_CreateConVar("demo_manager_recorder_ignorebots", "1", "Ignore bots in the player count", _, true, 0.0, true, 1.0);
 	g_cDemoPath = AutoExecConfig_CreateConVar("demo_manager_recorder_path", ".", "Path to store recorded demos");
 	
 	char sPath[PLATFORM_MAX_PATH];
-	GetConVarString(g_cDemoPath, sPath, sizeof(sPath));
+	g_cDemoPath.GetString(sPath, sizeof(sPath));
 	if(!DirExists(sPath))
 	{
 		InitDirectory(sPath);
 	}
 	
-	HookConVarChange(g_hMinPlayersStart, OnConVarChanged);
-	HookConVarChange(g_hIgnoreBots, OnConVarChanged);
-	HookConVarChange(g_cDemoPath, OnConVarChanged);
+	g_cDemoPath.AddChangeHook(OnConVarChanged);
 	
 	CreateTimer(10.0, Timer_CheckStatus, _, TIMER_REPEAT);
 	
@@ -54,7 +52,7 @@ public Action Timer_CheckStatus(Handle timer)
 
 void CheckStatus()
 {
-	int iMinClients = g_hMinPlayersStart.IntValue;
+	int iMinClients = g_cMinPlayersStart.IntValue;
 	
 	if(g_dDatabase != null && !SourceTV_IsRecording() && GetPlayerCount() >= iMinClients)
 	{
@@ -72,13 +70,13 @@ void StartRecord()
 	{
 		char sPath[PLATFORM_MAX_PATH], sTime[16], sMap[32], sFile[PLATFORM_MAX_PATH];
 		
-		GetConVarString(g_cDemoPath, sPath, sizeof(sPath));
+		g_cDemoPath.GetString(sPath, sizeof(sPath));
 		FormatTime(sTime, sizeof(sTime), "%Y%m%d-%H%M%S", GetTime());
 		GetCurrentMap(sMap, sizeof(sMap));
 		
 		ReplaceString(sMap, sizeof(sMap), "/", "-", false);		
 		
-		Format(sFile, sizeof(sFile), "%s/auto-%d-%s-%s", sPath, GetConVarInt(FindConVar("hostport")), sTime, sMap);
+		Format(sFile, sizeof(sFile), "%s/auto-%d-%s-%s", sPath, FindConVar("hostport").IntValue, sTime, sMap);
 		StripQuotes(sFile);
 		
 		if (!SourceTV_StartRecording(sFile))
