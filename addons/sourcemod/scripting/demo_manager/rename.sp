@@ -33,7 +33,7 @@ int FindGOTV()
 {
 	for(int i; i <= MaxClients; i++)
 	{
-		if(IsClientValid(i) && IsClientSourceTV(i))
+		if(IsClientInGame(i) && IsClientSourceTV(i))
 		{
 			return i;
 		}

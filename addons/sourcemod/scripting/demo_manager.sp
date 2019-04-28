@@ -110,10 +110,7 @@ int GetPlayerCount()
 	int iCount = 0;
 	LoopClients(i)
 	{
-		if(!IsFakeClient(i) && !IsClientSourceTV(i))
-		{
-			iCount++;
-		}
+		iCount++;
 	}
 
 	return iCount;
