@@ -3,6 +3,7 @@
 
 #include <sourcemod>
 #include <sdktools>
+#include <autoexecconfig>
 #include <sourcetvmanager>
 #include <bzip2>
 #include <tEasyFTP>
@@ -44,12 +45,15 @@ public void OnPluginStart()
 	FormatTime(sDate, sizeof(sDate), "%y-%m-%d");
 	BuildPath(Path_SM, g_sLogFile, sizeof(g_sLogFile), "logs/gotv_%s.log", sDate);
 	
+	AutoExecConfig_SetCreateDirectory(true);
+	AutoExecConfig_SetCreateFile(true);
+	AutoExecConfig_SetFile("demo_manager");
 	MySQL_OnPluginStart();
 	Recorder_OnPluginStart();
 	Rename_OnPluginStart();
 	Upload_OnPluginStart();
-	
-	AutoExecConfig(true, "demo_manager");
+	AutoExecConfig_ExecuteFile();
+	AutoExecConfig_CleanFile();
 	
 	RegConsoleCmd("sm_tick", Command_Tick);
 }

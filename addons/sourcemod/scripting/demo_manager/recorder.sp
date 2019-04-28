@@ -1,8 +1,8 @@
 void Recorder_OnPluginStart()
 {
-	g_hMinPlayersStart = CreateConVar("demo_manager_recorder_minplayers", "2", "Minimum players on server to start recording", _, true, 0.0);
-	g_hIgnoreBots = CreateConVar("demo_manager_recorder_ignorebots", "1", "Ignore bots in the player count", _, true, 0.0, true, 1.0);
-	g_cDemoPath = CreateConVar("demo_manager_recorder_path", ".", "Path to store recorded demos");
+	g_hMinPlayersStart = AutoExecConfig_CreateConVar("demo_manager_recorder_minplayers", "2", "Minimum players on server to start recording", _, true, 0.0);
+	g_hIgnoreBots = AutoExecConfig_CreateConVar("demo_manager_recorder_ignorebots", "1", "Ignore bots in the player count", _, true, 0.0, true, 1.0);
+	g_cDemoPath = AutoExecConfig_CreateConVar("demo_manager_recorder_path", ".", "Path to store recorded demos");
 	
 	char sPath[PLATFORM_MAX_PATH];
 	GetConVarString(g_cDemoPath, sPath, sizeof(sPath));
