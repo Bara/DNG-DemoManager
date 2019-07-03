@@ -108,31 +108,31 @@ CURLFORM_STREAM
  * To see how it work? see curl_echo_test.sp & curl_rcon_test.sp examples
  */
 enum SendRecv_Act {
-	SendRecv_Act_NOTHING = 0,
+    SendRecv_Act_NOTHING = 0,
 
-	SendRecv_Act_GOTO_SEND,
-	SendRecv_Act_GOTO_RECV,
-	SendRecv_Act_GOTO_WAIT,
-	SendRecv_Act_GOTO_END,
-	SendRecv_Act_GOTO_SEND_NO_WAIT,
-	SendRecv_Act_GOTO_RECV_NO_WAIT,
+    SendRecv_Act_GOTO_SEND,
+    SendRecv_Act_GOTO_RECV,
+    SendRecv_Act_GOTO_WAIT,
+    SendRecv_Act_GOTO_END,
+    SendRecv_Act_GOTO_SEND_NO_WAIT,
+    SendRecv_Act_GOTO_RECV_NO_WAIT,
 
-	SendRecv_Act_LAST,
+    SendRecv_Act_LAST,
 };
 
 /**
  * Hash type for curl_hash_file, curl_hash_string
  */
 enum Openssl_Hash {
-	Openssl_Hash_MD5 = 0,
-	Openssl_Hash_MD4,
-	Openssl_Hash_SHA,
-	Openssl_Hash_SHA1,
-	Openssl_Hash_SHA224,
-	Openssl_Hash_SHA256,
-	Openssl_Hash_SHA384,
-	Openssl_Hash_SHA512,
-	Openssl_Hash_RIPEMD160,
+    Openssl_Hash_MD5 = 0,
+    Openssl_Hash_MD4,
+    Openssl_Hash_SHA,
+    Openssl_Hash_SHA1,
+    Openssl_Hash_SHA224,
+    Openssl_Hash_SHA256,
+    Openssl_Hash_SHA384,
+    Openssl_Hash_SHA512,
+    Openssl_Hash_RIPEMD160,
 };
 
 
@@ -150,8 +150,8 @@ enum Openssl_Hash {
  */
 typeset CURL_OnComplete
 {
-	function int (Handle hndl, CURLcode code);
-	function int (Handle hndl, CURLcode code, any data);
+    function int (Handle hndl, CURLcode code);
+    function int (Handle hndl, CURLcode code, any data);
 };
 
 /**
@@ -164,8 +164,8 @@ typeset CURL_OnComplete
  */
 typeset CURL_OnSend
 {
-	function SendRecv_Act (Handle hndl, CURLcode code, const int last_sent_dataSize);
-	function SendRecv_Act (Handle hndl, CURLcode code, const int last_sent_dataSize, any data);
+    function SendRecv_Act (Handle hndl, CURLcode code, const int last_sent_dataSize);
+    function SendRecv_Act (Handle hndl, CURLcode code, const int last_sent_dataSize, any data);
 }
 
 /**
@@ -178,8 +178,8 @@ typeset CURL_OnSend
  */
 typeset CURL_OnReceive
 {
-	function SendRecv_Act (Handle hndl, CURLcode code, const char[] receiveData, const int dataSize);
-	function SendRecv_Act (Handle hndl, CURLcode code, const char[] receiveData, const int dataSize, any data);
+    function SendRecv_Act (Handle hndl, CURLcode code, const char[] receiveData, const int dataSize);
+    function SendRecv_Act (Handle hndl, CURLcode code, const char[] receiveData, const int dataSize, any data);
 }
 
 /**
@@ -191,20 +191,20 @@ typeset CURL_OnReceive
  */
 typeset Openssl_Hash_Complete
 {
-	function int (const bool success, const char[] buffer);
-	function int (const bool success, const char[] buffer, any data);
+    function int (const bool success, const char[] buffer);
+    function int (const bool success, const char[] buffer, any data);
 }
 
 
 typeset CURL_Function_CB
 {
-	// CURLOPT_WRITEFUNCTION
-	function int (Handle hndl, const char[] buffer, const int bytes, const int nmemb);
-	function int (Handle hndl, const char[] buffer, const int bytes, const int nmemb, any data);
-	
-	// CURLOPT_READFUNCTION
-	function int (Handle hndl, const int bytes, const int nmemb);
-	function int (Handle hndl, const int bytes, const int nmemb, any data);
+    // CURLOPT_WRITEFUNCTION
+    function int (Handle hndl, const char[] buffer, const int bytes, const int nmemb);
+    function int (Handle hndl, const char[] buffer, const int bytes, const int nmemb, any data);
+    
+    // CURLOPT_READFUNCTION
+    function int (Handle hndl, const int bytes, const int nmemb);
+    function int (Handle hndl, const int bytes, const int nmemb, any data);
 }
 
 /*************************************************************************************************/
@@ -241,10 +241,10 @@ native bool curl_easy_setopt_int(Handle hndl, CURLoption:opt, value);
 /**
  * Set a curl option for CURLOPTTYPE_LONG type
  * @ example"
-	new opt[][2] = {
-		{_:CURLOPT_NOPROGRESS,1},
-		{_:CURLOPT_VERBOSE,0}
-	};
+    new opt[][2] = {
+        {_:CURLOPT_NOPROGRESS,1},
+        {_:CURLOPT_VERBOSE,0}
+    };
  *
  * @ param Handle		hndl		The handle of the curl to be used. May be INVALID_HANDLE if not essential.
  * @ param cell_t		array		The option array to add (see enum CURLoption for details).
@@ -266,9 +266,9 @@ native bool curl_easy_setopt_int64(Handle hndl, CURLoption:opt, const String:buf
 /**
  * Set a curl option for CURLOPTTYPE_OBJECTPOINT type
  * @ note only accept the following handle type
- 	curl_OpenFile()
- 	curl_httppost()
- 	curl_slist()
+     curl_OpenFile()
+     curl_httppost()
+     curl_slist()
  *
  * @ param Handle		hndl		The handle of the curl to be used. May be INVALID_HANDLE if not essential.
  * @ param CURLoption	opt			The option to add (see enum CURLoption for details).
@@ -550,16 +550,16 @@ native bool curl_hash_string(const String:input[], dataSize, Openssl_Hash:algori
  */
 public Extension:__ext_curl = 
 {
-	name = "curl",
-	file = "curl.ext",
+    name = "curl",
+    file = "curl.ext",
 #if defined AUTOLOAD_EXTENSIONS
-	autoload = 1,
+    autoload = 1,
 #else
-	autoload = 0,
+    autoload = 0,
 #endif
 #if defined REQUIRE_EXTENSIONS
-	required = 1,
+    required = 1,
 #else
-	required = 0,
+    required = 0,
 #endif
 };

@@ -9,10 +9,10 @@
 #define DEF_SHOT_LENGTH				6.0  // average time of a cut (seconds)
 
 enum SourceTVBroadcastTarget {
-	// Send message to all spectators including proxies.
-	BTarget_Everyone = 0,
-	// Send message only to locally connected spectators.
-	BTarget_OnlyLocal
+    // Send message to all spectators including proxies.
+    BTarget_Everyone = 0,
+    // Send message only to locally connected spectators.
+    BTarget_OnlyLocal
 };
 
 /**
@@ -485,59 +485,59 @@ forward void SourceTV_OnSpectatorChatMessage_Post(int client, const char[] messa
  */
 public Extension __ext_stvmngr = 
 {
-	name = "SourceTV Manager",
-	file = "sourcetvmanager.ext",
+    name = "SourceTV Manager",
+    file = "sourcetvmanager.ext",
 #if defined AUTOLOAD_EXTENSIONS
-	autoload = 1,
+    autoload = 1,
 #else
-	autoload = 0,
+    autoload = 0,
 #endif
 #if defined REQUIRE_EXTENSIONS
-	required = 1,
+    required = 1,
 #else
-	required = 0,
+    required = 0,
 #endif
 };
 
 #if !defined REQUIRE_EXTENSIONS
 public void __ext_stvmngr_SetNTVOptional()
 {
-	MarkNativeAsOptional("SourceTV_GetServerInstanceCount");
-	MarkNativeAsOptional("SourceTV_SelectServerInstance");
-	MarkNativeAsOptional("SourceTV_GetSelectedServerInstance");
-	MarkNativeAsOptional("SourceTV_IsActive");
-	MarkNativeAsOptional("SourceTV_IsMasterProxy");
-	MarkNativeAsOptional("SourceTV_GetServerIP");
-	MarkNativeAsOptional("SourceTV_GetServerPort");
-	MarkNativeAsOptional("SourceTV_GetBotIndex");
-	MarkNativeAsOptional("SourceTV_GetLocalStats");
-	MarkNativeAsOptional("SourceTV_GetGlobalStats");
-	MarkNativeAsOptional("SourceTV_GetBroadcastTick");
-	MarkNativeAsOptional("SourceTV_GetDelay");
-	MarkNativeAsOptional("SourceTV_BroadcastScreenMessage");
-	MarkNativeAsOptional("SourceTV_BroadcastConsoleMessage");
-	MarkNativeAsOptional("SourceTV_BroadcastChatMessage");
-	MarkNativeAsOptional("SourceTV_GetViewEntity");
-	MarkNativeAsOptional("SourceTV_GetViewOrigin");
-	MarkNativeAsOptional("SourceTV_ForceFixedCameraShot");
-	MarkNativeAsOptional("SourceTV_ForceChaseCameraShot");
-	MarkNativeAsOptional("SourceTV_StartRecording");
-	MarkNativeAsOptional("SourceTV_StopRecording");
-	MarkNativeAsOptional("SourceTV_IsRecording");
-	MarkNativeAsOptional("SourceTV_GetDemoFileName");
-	MarkNativeAsOptional("SourceTV_GetRecordingTick");
-	MarkNativeAsOptional("SourceTV_PrintToDemoConsole");
-	MarkNativeAsOptional("SourceTV_GetSpectatorCount");
-	MarkNativeAsOptional("SourceTV_GetMaxClients");
-	MarkNativeAsOptional("SourceTV_GetClientCount");
-	MarkNativeAsOptional("SourceTV_IsClientConnected");
-	MarkNativeAsOptional("SourceTV_IsClientProxy");
-	MarkNativeAsOptional("SourceTV_GetClientName");
-	MarkNativeAsOptional("SourceTV_GetClientIP");
-	MarkNativeAsOptional("SourceTV_GetClientPassword");
-	MarkNativeAsOptional("SourceTV_KickClient");
-	MarkNativeAsOptional("SourceTV_PrintToChat");
-	MarkNativeAsOptional("SourceTV_PrintToConsole");
-	MarkNativeAsOptional("SourceTV_SetClientTVTitle");
+    MarkNativeAsOptional("SourceTV_GetServerInstanceCount");
+    MarkNativeAsOptional("SourceTV_SelectServerInstance");
+    MarkNativeAsOptional("SourceTV_GetSelectedServerInstance");
+    MarkNativeAsOptional("SourceTV_IsActive");
+    MarkNativeAsOptional("SourceTV_IsMasterProxy");
+    MarkNativeAsOptional("SourceTV_GetServerIP");
+    MarkNativeAsOptional("SourceTV_GetServerPort");
+    MarkNativeAsOptional("SourceTV_GetBotIndex");
+    MarkNativeAsOptional("SourceTV_GetLocalStats");
+    MarkNativeAsOptional("SourceTV_GetGlobalStats");
+    MarkNativeAsOptional("SourceTV_GetBroadcastTick");
+    MarkNativeAsOptional("SourceTV_GetDelay");
+    MarkNativeAsOptional("SourceTV_BroadcastScreenMessage");
+    MarkNativeAsOptional("SourceTV_BroadcastConsoleMessage");
+    MarkNativeAsOptional("SourceTV_BroadcastChatMessage");
+    MarkNativeAsOptional("SourceTV_GetViewEntity");
+    MarkNativeAsOptional("SourceTV_GetViewOrigin");
+    MarkNativeAsOptional("SourceTV_ForceFixedCameraShot");
+    MarkNativeAsOptional("SourceTV_ForceChaseCameraShot");
+    MarkNativeAsOptional("SourceTV_StartRecording");
+    MarkNativeAsOptional("SourceTV_StopRecording");
+    MarkNativeAsOptional("SourceTV_IsRecording");
+    MarkNativeAsOptional("SourceTV_GetDemoFileName");
+    MarkNativeAsOptional("SourceTV_GetRecordingTick");
+    MarkNativeAsOptional("SourceTV_PrintToDemoConsole");
+    MarkNativeAsOptional("SourceTV_GetSpectatorCount");
+    MarkNativeAsOptional("SourceTV_GetMaxClients");
+    MarkNativeAsOptional("SourceTV_GetClientCount");
+    MarkNativeAsOptional("SourceTV_IsClientConnected");
+    MarkNativeAsOptional("SourceTV_IsClientProxy");
+    MarkNativeAsOptional("SourceTV_GetClientName");
+    MarkNativeAsOptional("SourceTV_GetClientIP");
+    MarkNativeAsOptional("SourceTV_GetClientPassword");
+    MarkNativeAsOptional("SourceTV_KickClient");
+    MarkNativeAsOptional("SourceTV_PrintToChat");
+    MarkNativeAsOptional("SourceTV_PrintToConsole");
+    MarkNativeAsOptional("SourceTV_SetClientTVTitle");
 }
 #endif

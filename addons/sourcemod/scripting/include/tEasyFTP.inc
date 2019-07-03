@@ -1,5 +1,5 @@
 #if defined _teftp_included_
-	#endinput
+    #endinput
 #endif
 #define _teftp_included_
 

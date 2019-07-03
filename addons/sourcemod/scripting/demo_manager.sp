@@ -31,89 +31,89 @@ char g_sLogFile[PLATFORM_MAX_PATH + 1] = "";
 
 public Plugin myinfo = 
 {
-	name = "Demo Manager - All in One package (Record, Compress, Upload and MySQL)",
-	author = "Bara (based on Stevo.TVR's demo plugin)",
-	description = "",
-	version = "1.0.0",
-	url = ""
+    name = "Demo Manager - All in One package (Record, Compress, Upload and MySQL)",
+    author = "Bara (based on Stevo.TVR's demo plugin)",
+    description = "",
+    version = "1.0.0",
+    url = ""
 }
 
 public void OnPluginStart()
 {
-	char sDate[32];
-	FormatTime(sDate, sizeof(sDate), "%y-%m-%d");
-	BuildPath(Path_SM, g_sLogFile, sizeof(g_sLogFile), "logs/gotv_%s.log", sDate);
-	
-	AutoExecConfig_SetCreateDirectory(true);
-	AutoExecConfig_SetCreateFile(true);
-	AutoExecConfig_SetFile("demo_manager");
-	MySQL_OnPluginStart();
-	Recorder_OnPluginStart();
-	Rename_OnPluginStart();
-	Upload_OnPluginStart();
-	AutoExecConfig_ExecuteFile();
-	AutoExecConfig_CleanFile();
-	
-	RegConsoleCmd("sm_tick", Command_Tick);
+    char sDate[32];
+    FormatTime(sDate, sizeof(sDate), "%y-%m-%d");
+    BuildPath(Path_SM, g_sLogFile, sizeof(g_sLogFile), "logs/gotv_%s.log", sDate);
+    
+    AutoExecConfig_SetCreateDirectory(true);
+    AutoExecConfig_SetCreateFile(true);
+    AutoExecConfig_SetFile("demo_manager");
+    MySQL_OnPluginStart();
+    Recorder_OnPluginStart();
+    Rename_OnPluginStart();
+    Upload_OnPluginStart();
+    AutoExecConfig_ExecuteFile();
+    AutoExecConfig_CleanFile();
+    
+    RegConsoleCmd("sm_tick", Command_Tick);
 }
 
 public void OnPluginEnd()
 {
-	Recorder_OnMapEnd();
+    Recorder_OnMapEnd();
 }
 
 public void OnClientPostAdminCheck(int client)
 {
-	Rename_OnClientPostAdminCheck(client);
+    Rename_OnClientPostAdminCheck(client);
 }
 
 public Action Command_Tick(int client, int args)
 {
-	if(SourceTV_IsRecording())
-	{
-		ReplyToCommand(client, "Der aktuelle Tick ist %d.", SourceTV_GetRecordingTick());
-	}
-	else
-	{
-		ReplyToCommand(client, "Es läuft keine Aufnahme.");
-	}
-	return Plugin_Handled;
+    if(SourceTV_IsRecording())
+    {
+        ReplyToCommand(client, "Der aktuelle Tick ist %d.", SourceTV_GetRecordingTick());
+    }
+    else
+    {
+        ReplyToCommand(client, "Es läuft keine Aufnahme.");
+    }
+    return Plugin_Handled;
 }
 
 public void OnMapStart()
 {
-	Recorder_OnMapStart();
+    Recorder_OnMapStart();
 }
 
 public void OnMapEnd()
 {
-	Recorder_OnMapEnd();
+    Recorder_OnMapEnd();
 }
 
 public void OnClientPutInServer(int client)
 {
-	Recorder_OnClientPutInServer();
+    Recorder_OnClientPutInServer();
 }
 
 public void OnClientDisconnect_Post(int client)
 {
-	Recorder_OnClientDisconnect_Post();
+    Recorder_OnClientDisconnect_Post();
 }
 
 int GetPlayerCount()
 {
-	if(!g_cIgnoreBots.BoolValue)
-	{
-		return GetClientCount(false) - 1;
-	}
+    if(!g_cIgnoreBots.BoolValue)
+    {
+        return GetClientCount(false) - 1;
+    }
 
-	int iCount = 0;
-	LoopClients(i)
-	{
-		iCount++;
-	}
+    int iCount = 0;
+    LoopClients(i)
+    {
+        iCount++;
+    }
 
-	return iCount;
+    return iCount;
 }
 
 stock bool IsClientValid(int client, bool bots = false)
