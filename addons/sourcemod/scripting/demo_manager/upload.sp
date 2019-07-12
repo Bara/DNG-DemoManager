@@ -8,9 +8,13 @@ void UploadDemo(const char[] outFile, const char[] sDemo)
 {
     char sTarget[32];
     g_cTarget.GetString(sTarget, sizeof(sTarget));
+
+    char sRemoteFile[PLATFORM_MAX_PATH + 1];
+    strcopy(sRemoteFile, sizeof(sRemoteFile), outFile);
+    ReplaceString(sRemoteFile, sizeof(sRemoteFile), "/demos/", "", false);
     
     DataPack pack = new DataPack();
-    EasyFTP_UploadFile(sTarget, outFile, outFile, UploadComplete, pack);
+    EasyFTP_UploadFile(sTarget, outFile, sRemoteFile, UploadComplete, pack);
     pack.WriteString(sDemo);
 }
 
